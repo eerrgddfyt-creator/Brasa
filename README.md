@@ -17,6 +17,14 @@ Todos os arquivos ficam na mesma pasta, sem subpastas.
 4. **Trava de segurança (opcional):** no Worker, crie ALLOW_ORIGIN com o endereço do seu site para o servidor só responder a ele.
 Pronto: todos os usuários veem as lives sem configurar nada. O Client Secret fica apenas no Worker, nunca nos arquivos do site.
 
+## Atualização automática (APK)
+O APK é só uma tela de abertura (brasa-apk.zip) que busca o site no GitHub Pages e abre sempre a versão mais nova. Você gera o APK uma vez.
+1. Crie um repositório público chamado brasa no GitHub e envie index.html, styles.css, app.js, profile.js e config.js (os outros arquivos são opcionais). Em Settings > Pages, escolha Deploy from a branch, branch main e pasta root.
+2. Abra https://SEU-USUARIO.github.io/brasa/ no navegador e confira se o site carrega.
+3. No index.html do APK, ajuste a linha GAME_URL se o seu link for diferente e gere o APK com a mesma ferramenta do seu outro jogo.
+4. Para atualizar: troque os arquivos no GitHub e aumente o número em const BRASA_V no index.html do site. O APK avisa e abre a versão nova, sem gerar APK de novo. O GitHub Pages pode demorar alguns minutos para publicar.
+O APK só precisa ser gerado de novo se você mudar o link, o nome ou o visual da abertura.
+
 ## Limites conhecidos
 - Espectadores atualizam cerca de 1 vez por minuto na Kick; o app consulta no máximo 1 vez por minuto.
 - A Kick pode bloquear o player incorporado em alguns sites; por isso existe o botão Abrir na Kick.
