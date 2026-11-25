@@ -25,6 +25,9 @@ O APK é só uma tela de abertura (brasa-apk.zip) que busca o site no GitHub Pag
 4. Para atualizar: troque os arquivos no GitHub e aumente o número em const BRASA_V no index.html do site. O APK avisa e abre a versão nova, sem gerar APK de novo. O GitHub Pages pode demorar alguns minutos para publicar.
 O APK só precisa ser gerado de novo se você mudar o link, o nome ou o visual da abertura.
 
+## Versionamento
+O Brasa segue o versionamento semântico. As regras e o histórico estão no CHANGELOG.md.
+
 ## Limites conhecidos
 - Espectadores atualizam cerca de 1 vez por minuto na Kick; o app consulta no máximo 1 vez por minuto.
 - A Kick pode bloquear o player incorporado em alguns sites; por isso existe o botão Abrir na Kick.

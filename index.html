@@ -1,48 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8"><title>Brasa</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#14110f"><meta name="mobile-web-app-capable" content="yes">
-<style>
-*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#14110f;color:#f2e9dc;font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-user-select:none;user-select:none}
-#up{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:0 24px;text-align:center}
-.mk{width:112px;height:112px;overflow:visible}.mk>*{animation:rise .9s cubic-bezier(.2,.8,.2,1) backwards;transform-box:fill-box;transform-origin:50% 100%}.mk>*:nth-child(2){animation-delay:.1s}.mk>*:nth-child(3){animation-delay:.2s}.mk>*:nth-child(6){animation-delay:.35s}.mk>*:nth-child(7){animation-delay:.5s}
-@keyframes rise{from{opacity:0;transform:translateY(8px) scale(.85)}}.wm{font:800 34px Georgia,"Times New Roman",serif;letter-spacing:.14em;animation:rise .8s .3s backwards}
-#bar{width:min(60vmin,320px);height:3px;background:#352f2a;border-radius:2px;overflow:hidden}#fill{display:block;height:100%;width:0;background:#ff5b2e;transition:width .3s}
-#msg{min-height:1.4em;color:#a39887;max-width:30em}#btns{display:none;gap:12px;flex-wrap:wrap;justify-content:center}
-button{border:0;min-height:48px;padding:0 20px;border-radius:24px;font:700 14px system-ui,sans-serif;cursor:pointer;background:#27221e;color:#f2e9dc}button.p{background:#ff5b2e;color:#14110f}
-#ver{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:12px;color:#a39887}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style></head><body>
-<div id="up"><svg class="mk" viewBox="170 170 684 684" aria-label="Brasa"><defs><clipPath id="km"><path d="M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z"/></clipPath><clipPath id="ka"><path d="M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z"/></clipPath></defs><path d="M250.0,374.0C263.2,478.4 430.0,530.6 430.0,722.0A92 92 0 0 1 246.0,722.0C246.0,565.4 179.6,548.0 250.0,374.0Z" fill="#B63A1B" stroke="#14110f" stroke-width="14" paint-order="stroke" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><path d="M760.0,458.0C770.5,539.6 768.0,580.4 768.0,730.0A78 78 0 0 1 612.0,730.0C612.0,607.6 704.0,594.0 760.0,458.0Z" fill="#B63A1B" stroke="#14110f" stroke-width="14" paint-order="stroke" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><path d="M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z" fill="#FF5B2E" stroke="#14110f" stroke-width="14" paint-order="stroke" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><g clip-path="url(#km)"><rect x="518" y="0" width="700" height="1024" fill="#E04A1F"/></g><g transform="translate(153.6,212.0) scale(.7)"><path d="M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z" fill="#E8A33D" stroke="#14110f" stroke-width="14" paint-order="stroke" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><g clip-path="url(#ka)"><rect x="520.6" y="0" width="900" height="1024" fill="#CF8C27"/></g></g><g transform="translate(311.2,406.0) scale(.4)"><path d="M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z" fill="#F2E9DC" stroke="#14110f" stroke-width="14" paint-order="stroke" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></g><polygon points="488.1,576.3 488.1,664.3 568.1,620.3" fill="#14110f" stroke="#14110f" stroke-width="16" stroke-linejoin="round"/></svg>
-<div class="wm">BRASA</div><div id="bar"><i id="fill"></i></div><div id="msg">Verificando atualização...</div>
-<div id="btns"><button id="tent" class="p">Tentar de novo</button><button id="abre">Abrir mesmo assim</button></div><div id="ver"></div></div>
-<script>
-// ===== LINK DO BRASA (GitHub Pages) =====
-const GAME_URL='https://eerrgddfyt-creator.github.io/brasa/';
-const APK_V='1.0.0'; // versão deste APK (só muda quando você gerar o APK de novo)
-// A versão do SITE fica no index.html do site: const BRASA_V = 'MAJOR.MINOR.PATCH'
-// =========================================
-(function(){
-  const KEY='brasaV',$=id=>document.getElementById(id),ver=h=>{const m=/const BRASA_V\s*=\s*['"](\d+\.\d+\.\d+)['"]/.exec(h);return m?m[1]:''},cmp=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++)if(x[i]!==y[i])return x[i]>y[i]?1:-1;return 0};
-  const pr=(p,t)=>{$('fill').style.width=p+'%';if(t)$('msg').textContent=t},nap=ms=>new Promise(r=>setTimeout(r,ms));
-  const abrir=()=>location.replace(GAME_URL),falha=m=>{pr(100,m);$('btns').style.display='flex'};
-  $('ver').textContent='APK v'+APK_V;
-  async function checar(){
-    $('btns').style.display='none';pr(8,'Verificando atualização...');
-    if(!/^https:\/\/[^\s"'<>]+$/i.test(GAME_URL)){falha('Falta configurar o link do site dentro do APK.');return}
-    if(navigator.onLine===false){falha('Sem internet. O Brasa precisa de conexão.');return}
-    let p=8;const iv=setInterval(()=>{p=Math.min(p+3,70);pr(p)},200),ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);let erro='';
-    try{
-      const r=await fetch(GAME_URL+'index.html?t='+Date.now(),{cache:'no-store',signal:ac.signal});
-      if(!r.ok)throw r.status;
-      const v=ver(await r.text()),antes=localStorage.getItem(KEY)||'';
-      if(antes&&v&&cmp(v,antes)>0){clearInterval(iv);pr(85,'Atualização encontrada! Carregando a versão '+v+'...');await nap(900)}
-      if(v)localStorage.setItem(KEY,v);
-    }catch(e){erro=typeof e==='number'?'Erro '+e+': site não encontrado no GitHub (confira o link)':e&&e.name==='AbortError'?'Demorou demais (8s) para responder':'Não conseguiu acessar o site (confira a internet e a permissão do APK)'}
-    clearTimeout(tm);clearInterval(iv);
-    if(erro){falha(erro);return}
-    pr(100,'Pronto!');await nap(400);abrir();
-  }
-  $('tent').onclick=checar;$('abre').onclick=abrir;checar();
-})();
-</script></body></html>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark light"><title>Brasa · lives</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22170 170 684 684%22%3E%3Crect x=%22170%22 y=%22170%22 width=%22684%22 height=%22684%22 rx=%22130%22 fill=%22%2314110f%22/%3E%3Cdefs%3E%3CclipPath id='fm'%3E%3Cpath d='M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z'/%3E%3C/clipPath%3E%3CclipPath id='fa'%3E%3Cpath d='M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cpath d='M250.0,374.0C263.2,478.4 430.0,530.6 430.0,722.0A92 92 0 0 1 246.0,722.0C246.0,565.4 179.6,548.0 250.0,374.0Z' fill='%23B63A1B' stroke='%2314110f' stroke-width='14' paint-order='stroke' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M760.0,458.0C770.5,539.6 768.0,580.4 768.0,730.0A78 78 0 0 1 612.0,730.0C612.0,607.6 704.0,594.0 760.0,458.0Z' fill='%23B63A1B' stroke='%2314110f' stroke-width='14' paint-order='stroke' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z' fill='%23FF5B2E' stroke='%2314110f' stroke-width='14' paint-order='stroke' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3Cg clip-path='url(%23fm)'%3E%3Crect x='518' y='0' width='700' height='1024' fill='%23E04A1F'/%3E%3C/g%3E%3Cg transform='translate(153.6,212.0) scale(.7)'%3E%3Cpath d='M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z' fill='%23E8A33D' stroke='%2314110f' stroke-width='14' paint-order='stroke' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3Cg clip-path='url(%23fa)'%3E%3Crect x='520.6' y='0' width='900' height='1024' fill='%23CF8C27'/%3E%3C/g%3E%3C/g%3E%3Cg transform='translate(311.2,406.0) scale(.4)'%3E%3Cpath d='M547.4,230.0C565.1,343.4 724.0,400.1 724.0,608.0A212 212 0 0 1 300.0,608.0C300.0,437.9 453.0,419.0 547.4,230.0Z' fill='%23F2E9DC' stroke='%2314110f' stroke-width='14' paint-order='stroke' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3Cpolygon points='488.1,576.3 488.1,664.3 568.1,620.3' fill='%2314110f' stroke='%2314110f' stroke-width='16' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>const BRASA_V='0.3.0';/* versão semântica MAJOR.MINOR.PATCH: veja o CHANGELOG.md */document.write('<link rel="stylesheet" href="styles.css?v='+BRASA_V+'">')</script></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></symbol>
+<symbol id="i-explore" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+<symbol id="i-seg" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/></symbol>
+<symbol id="i-heartf" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z" fill="currentColor"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-perfil" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></symbol>
+<symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5H5V6h5"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+</defs></svg>
+<div id="app"><header id="hd"></header><main id="m"></main>
+<nav aria-label="Principal"><a href="#/" data-k="home"><svg class="i"><use href="#i-home"/></svg>Início</a><a href="#/explorar" data-k="explore"><svg class="i"><use href="#i-explore"/></svg>Explorar</a><a href="#/seguindo" data-k="seg"><svg class="i"><use href="#i-seg"/></svg>Seguindo</a><a href="#/perfil" data-k="perfil"><svg class="i"><use href="#i-perfil"/></svg>Perfil</a></nav></div>
+<div id="sh" hidden></div><div id="ts" role="status"></div>
+<script>document.write('<script src="config.js?v='+BRASA_V+'"><\/script>')</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+<script>document.write('<script src="app.js?v='+BRASA_V+'"><\/script><script src="profile.js?v='+BRASA_V+'"><\/script>')</script></body></html>
