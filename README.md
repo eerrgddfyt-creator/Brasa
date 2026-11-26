@@ -25,6 +25,14 @@ O APK é só uma tela de abertura (brasa-apk.zip) que busca o site no GitHub Pag
 4. Para atualizar: troque os arquivos no GitHub e aumente o número em const BRASA_V no index.html do site. O APK avisa e abre a versão nova, sem gerar APK de novo. O GitHub Pages pode demorar alguns minutos para publicar.
 O APK só precisa ser gerado de novo se você mudar o link, o nome ou o visual da abertura.
 
+## Chat Brasa (0.4.0)
+1. No Supabase, abra o SQL Editor, cole o atualizacao-0.4.0.sql e rode uma vez. Se você ainda não rodou o schema.sql, rode só o schema.sql, que já inclui o chat.
+2. Em Database > Replication (ou Realtime), confira se a tabela chat_messages está ligada.
+3. Suba os arquivos de novo e aumente a versão, como no CHANGELOG.
+Como funciona: o servidor define nome, cor, fonte e tag da mensagem, então ninguém consegue falsificar. Moderação (banir, apagar) é feita pelo SQL Editor; os comandos estão no fim do atualizacao-0.4.0.sql.
+Este chat é só do Brasa e não aparece na Kick. Conectar ao chat da Kick (ler e comentar) fica para as próximas versões.
+Antes de abrir ao público, o chat pede moderação e verificação de idade confiável (ECA Digital).
+
 ## Versionamento
 O Brasa segue o versionamento semântico. As regras e o histórico estão no CHANGELOG.md.
 

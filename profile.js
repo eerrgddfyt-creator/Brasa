@@ -1,7 +1,7 @@
 /* Brasa · Fase 2: contas, perfil, inventário e personalização (Supabase). Sem dinheiro. */
 (()=>{'use strict';
 const B=window.Brasa,{VW,act,esc,I,toast,sh,art}=B,C=window.BRASA_CONFIG||{},$=s=>document.querySelector(s);
-const sb=C.SUPABASE_URL&&C.SUPABASE_ANON_KEY&&window.supabase?window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY):null;
+const sb=C.SUPABASE_URL&&C.SUPABASE_ANON_KEY&&window.supabase?window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY):null;B.sb=sb;
 const HEX=/^#[0-9a-f]{6}$/i,hx=v=>HEX.test(v||'')?v:'#f2e9dc';
 const FONTS={padrao:'system-ui,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'ui-monospace,Menlo,Consolas,monospace',redonda:'ui-rounded,"Segoe UI",system-ui,sans-serif'};
 const TONE={em:['#ff5b2e','#14110f'],ouro:['#e8a33d','#14110f'],musgo:['#2d4a3e','#f2e9dc'],tinta:['#f2e9dc','#14110f'],vinho:['#7a3b2a','#f2e9dc']};

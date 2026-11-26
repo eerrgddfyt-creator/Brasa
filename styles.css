@@ -43,3 +43,10 @@ nav{display:flex;border-top:1px solid var(--ln);background:var(--bg);padding-bot
 #app.w #hd,#app.w nav{display:none}.pl{margin:0 -16px;border-radius:0;position:sticky;top:0;z-index:3}
 .who2{display:flex;align-items:center;gap:12px;margin:14px 0 6px}.who2 .tx{flex:1}.av.big{width:52px;height:52px}.vm{color:var(--em);font-weight:700}.tt{font-size:17px;font-weight:700;margin:8px 0}.vf{text-align:center;margin-top:28px}
 @media(orientation:landscape) and (max-height:520px){.pl{margin:0 -16px}.wbar{display:none}}
+
+#app.w main{display:flex;flex-direction:column;overflow:hidden;padding-top:0;padding-bottom:0}#app.w .pl{position:static;flex:none}#wh{flex:none}.who2{margin:10px 0 4px}
+.wtabs{display:flex;gap:6px;flex:none;border-bottom:1px solid var(--ln)}.wt{flex:1;min-height:44px;text-align:center;color:var(--mu);font-weight:700;border-bottom:3px solid transparent}.wt.on{color:var(--ink);border-bottom-color:var(--em)}
+.wbody{flex:1;min-height:0;display:flex;flex-direction:column}#pchat{flex:1;min-height:0;display:flex;flex-direction:column}#psobre{flex:1;min-height:0;overflow-y:auto;padding:10px 0 24px}#psobre[hidden],#pchat[hidden]{display:none}
+.chat{flex:1;min-height:0;display:flex;flex-direction:column}.cnote{margin:8px 0 0}.msgs{flex:1;min-height:0;overflow-y:auto;padding:6px 0}.cm{padding:3px 0;overflow-wrap:anywhere;font-size:15px}.cm b{margin-right:4px}.cm .tg{margin:0 6px 0 0}
+.cin{flex:none;display:flex;gap:8px;align-items:center;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}.cin .in{margin:0;flex:1}.cin .btn{margin:0}
+@media(orientation:landscape) and (max-height:520px){#wh,.wtabs,.wbody{display:none}#app.w .pl{aspect-ratio:auto;flex:1}}
