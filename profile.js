@@ -1,7 +1,7 @@
 /* Brasa · Fase 2: contas, perfil, inventário e personalização (Supabase). Sem dinheiro. */
 (()=>{'use strict';
 const B=window.Brasa,{VW,act,esc,I,toast,sh,art}=B,C=window.BRASA_CONFIG||{},$=s=>document.querySelector(s);
-const sb=C.SUPABASE_URL&&C.SUPABASE_ANON_KEY&&window.supabase?window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY):null;B.sb=sb;
+const BADK=/^sb_secret_/.test(C.SUPABASE_ANON_KEY||'');const sb=!BADK&&C.SUPABASE_URL&&C.SUPABASE_ANON_KEY&&window.supabase?window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY):null;B.sb=sb;
 const HEX=/^#[0-9a-f]{6}$/i,hx=v=>HEX.test(v||'')?v:'#f2e9dc';
 const FONTS={padrao:'system-ui,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'ui-monospace,Menlo,Consolas,monospace',redonda:'ui-rounded,"Segoe UI",system-ui,sans-serif'};
 const TONE={em:['#ff5b2e','#14110f'],ouro:['#e8a33d','#14110f'],musgo:['#2d4a3e','#f2e9dc'],tinta:['#f2e9dc','#14110f'],vinho:['#7a3b2a','#f2e9dc']};
@@ -20,7 +20,7 @@ const tiles=k=>S.items.filter(x=>x.kind===k).map(x=>{const own=S.inv.includes(x.
 const er=m=>/Invalid login/i.test(m)?'E-mail ou senha incorretos.':/already (been )?registered/i.test(m)?'Este e-mail já tem conta.':/Password should/i.test(m)?'A senha precisa ter pelo menos 8 caracteres.':/rate limit/i.test(m)?'Muitas tentativas. Espere um pouco.':'Algo deu errado: '+m;
 const msg=m=>{const e=$('#pm');if(e)e.textContent=m},val=id=>($(id)||{}).value||'';
 const auth=()=>{const su=S.mode==='signup';return`<h1>${su?'Criar conta':'Entrar'}</h1><div class="box"><label class="lb">E-mail<input id="pe" class="in" type="email" autocomplete="email" inputmode="email"></label>${su?'<label class="lb">Nome de usuário<input id="pu" class="in" maxlength="20" autocomplete="username" placeholder="minúsculas, números e _"></label>':''}<label class="lb">Senha<input id="pp" class="in" type="password" autocomplete="${su?'new-password':'current-password'}"></label><p class="mu sm" id="pm"></p><button class="btn" data-a="${su?'pf:signup':'pf:login'}">${su?'Criar conta':'Entrar'}</button><button class="btn s" data-a="pf:mode">${su?'Já tenho conta':'Criar conta'}</button>${su?'':'<button class="lk2" data-a="pf:reset">Esqueci a senha</button>'}</div>`};
-VW.perfil=()=>{if(!sb)return`<h1>Perfil</h1><div class="box"><h2 style="margin-top:0">Contas ainda não conectadas</h2><p>Crie um projeto gratuito no Supabase, rode o arquivo schema.sql e preencha o config.js. O passo a passo está no README.</p></div>`;
+VW.perfil=()=>{if(BADK)return`<h1>Perfil</h1><div class="box err"><h2 style="margin-top:0">Chave secreta no config.js</h2><p>Troque pela chave publishable (sb_publishable_...) e apague a chave secreta no painel do Supabase. O app não usa chaves secretas.</p></div>`;if(!sb)return`<h1>Perfil</h1><div class="box"><h2 style="margin-top:0">Contas ainda não conectadas</h2><p>Crie um projeto gratuito no Supabase, rode o arquivo schema.sql e preencha o config.js. O passo a passo está no README.</p></div>`;
 if(!S.loaded)return'<h1>Perfil</h1><div class="sk"></div>';
 if(S.recov)return`<h1>Nova senha</h1><div class="box"><label class="lb">Nova senha (mínimo 8 caracteres)<input id="pp" class="in" type="password" autocomplete="new-password"></label><p class="mu sm" id="pm"></p><button class="btn" data-a="pf:setpw">Salvar senha</button></div>`;
 if(!S.user)return auth();if(!S.prof)return`<h1>Perfil</h1><div class="box"><p>Não encontramos seu perfil. Saia e entre de novo; se continuar, avise o suporte.</p><button class="btn s" data-a="pf:logout">Sair</button></div>`;

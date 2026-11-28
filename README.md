@@ -47,7 +47,7 @@ Arquivos novos: profile.js, config.js e schema.sql. O app já funciona sem eles;
 1. Crie um projeto gratuito em supabase.com.
 2. No SQL Editor, cole e rode o schema.sql inteiro (cria tabelas, regras de segurança, a função de equipar e o catálogo inicial).
 3. Em Authentication > URL Configuration, coloque o endereço do seu site em Site URL e em Redirect URLs. Em Providers, deixe Email ligado.
-4. Em Project Settings > API, copie a Project URL e a chave anon e cole no config.js. Nunca use a chave service_role em arquivo nenhum do site.
+4. Em Settings > API Keys, copie a Project URL e a chave Publishable (sb_publishable_...) ou a anon e cole no config.js. Nunca use a chave service_role em arquivo nenhum do site.
 5. Suba os arquivos de novo. Crie uma conta de teste: você recebe os itens iniciais já equipados.
 
 Como a segurança funciona: o navegador só consegue ler o catálogo e os perfis, ler o próprio inventário e mudar o próprio nome de exibição. Dar item e equipar item só acontece no servidor (gatilho de cadastro e função equip), que confere se o item é seu.

@@ -6,6 +6,14 @@ Seguimos o versionamento semântico (MAJOR.MINOR.PATCH). A versão fica em `cons
 - MAJOR (1.0.0): lançamento público ou mudança que exige ação (ex.: mudar o banco de dados).
 Enquanto estiver em 0.x o app está em desenvolvimento inicial. Toda mudança no schema.sql deve ser citada aqui.
 
+## [0.4.1] - 2026-11-27
+### Corrigido
+- Biblioteca do Supabase atualizada (2.106.1) para funcionar com as novas chaves publishable.
+### Segurança
+- O app recusa uma Secret key (sb_secret_...) no config.js e avisa no Perfil.
+### Configuração
+- config.js agora vem com o projeto Supabase e a chave publishable da Brasa.
+
 ## [0.4.0] - 2026-11-25
 ### Adicionado
 - Chat Brasa: chat por canal só com os usuários do Brasa, usando o nome, a cor, a fonte e a tag que cada um equipou. Mensagens em tempo real (Supabase Realtime), limite de 300 caracteres e 1 mensagem a cada 2 segundos.
